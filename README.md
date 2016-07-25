@@ -5,10 +5,15 @@ adaptations for Lua. All wrapped around the Love game framework, which is used
 for rendering.
 
 Developed without ever really looking at the react source code, though it does 
-follow the redux source more closely.
+follow the redux source more closely, as I had less experience as a user of 
+redux.
 
 This is intended as a personal project, and I will probably diverge from the 
 react/redux approach I've currently taken to explore other solutions.
+
+
+React - https://github.com/facebook/react
+Redux - https://github.com/reactjs/redux
 
 
 ##To build##
