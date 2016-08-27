@@ -13,6 +13,7 @@ react/redux approach I've currently taken to explore other solutions.
 
 
 React - https://github.com/facebook/react
+
 Redux - https://github.com/reactjs/redux
 
 
