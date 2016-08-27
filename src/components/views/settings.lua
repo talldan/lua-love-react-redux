@@ -5,6 +5,7 @@ local propTypes = {}
 local textProps = {
   x = 0,
   y = 10,
+  width = 200,
   r = 255,
   g = 255,
   b = 255,

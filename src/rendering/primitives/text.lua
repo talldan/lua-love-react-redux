@@ -1,16 +1,34 @@
+function getFormattedText(next)
+  local value = next.value
+  local wraplimit = nil
+  local alignment = 'left'
+
+  if next.width ~= nil then
+    wraplimit = next.width
+  end
+
+  if next.alignment ~= nil then
+    alignment = next.alignment
+  end
+  
+  return value, wraplimit, alignment
+end
+
 function makeText(next)
   local fontSize = next.fontSize or 12
   local font = next.font or love.graphics.newFont(fontSize)
-  return love.graphics.newText(font, next.value)
+  local textDrawable = love.graphics.newText(font)
+  textDrawable:setf(getFormattedText(next)) 
+  return textDrawable
 end
 
 function updateText(drawable, previous, next)
   if previous.value ~= next.value then
-    static.textDrawable.set(next.value)
+    drawable:setf(getFormattedText(next))
   end
 
   if previous.font ~= next.font then
-    static.textDrawable.setFont(next.font)
+    drawable:setFont(next.font)
   end
 end
 
