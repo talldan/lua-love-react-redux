@@ -53,7 +53,7 @@ function postDrawHandler()
   scrolls = {}
 end
 
-function render(props, children)
+function render(props, children, key)
   props.presses = presses
   props.releases = releases
   props.moves = moves
@@ -63,7 +63,8 @@ function render(props, children)
   return {
     type = 'inputHandler',
     props = props,
-    children = children
+    children = children,
+    key = key
   }
 end
 

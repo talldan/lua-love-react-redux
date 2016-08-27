@@ -1,15 +1,11 @@
 local declare = require('rendering.declare')
+local connect = require('store.connect')
 local menuButton = require('components.menuButton')
 local actionTypes = require('constants.actionTypes')
+local dispatchAction = require('helpers.store.dispatchAction')
+local assign = require('utils.assign')
+local map = require('utils.map')
 local propTypes = {}
-
-function dispatchAction(dispatch, actionType)
-  return function()
-    dispatch({
-      actionType = actionType  
-    })
-  end
-end
 
 function mapStateToProps(storeState)
   return {
@@ -67,18 +63,17 @@ local buttonProps = {
 }
 
 function render(props)
-  local buttons = {}
-
-  for index, buttonProperties in pairs(buttonProps) do
-    local key = buttonProperties.buttonKey
-    buttonProperties.isHovered = props.buttonState[key].isHovered
-    buttonProperties.onPress = props.buttonActions[key].onPress
-    buttonProperties.onHoverIn = props.buttonActions[key].onHoverIn
-    buttonProperties.onHoverOut = props.buttonActions[key].onHoverOut
-    buttons[#buttons + 1] = menuButton(buttonProperties)
-  end
-
-  return buttons
+  local props = props
+  return map(buttonProps, function(properties)
+    local key = properties.buttonKey
+    local menuButtonProps = assign(
+      {}, 
+      properties, 
+      props.buttonState[key], 
+      props.buttonActions[key]
+    )
+    return menuButton(menuButtonProps, nil, key)
+  end)
 end
 
 local declared = declare(render, propTypes)

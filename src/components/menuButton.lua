@@ -16,7 +16,7 @@ local textColor = {
   a = 255
 }
 
-function render(props)
+function render(props, children, key)
   local multiplier = 1
 
   if props.isHovered then
@@ -41,7 +41,7 @@ function render(props)
     fontSize = 20
   }
 
-  return colorMultiplier(colorMultiplierProps, button(buttonProps))
+  return colorMultiplier(colorMultiplierProps, button(buttonProps, nil, key))
 end
 
 return declare(render, propTypes)

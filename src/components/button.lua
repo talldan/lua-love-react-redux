@@ -4,7 +4,7 @@ local text = require('components.love.text')
 local inputHandler = require('components.love.inputHandler')
 local propTypes = {}
 
-function render(props)
+function render(props, children, key)
   local inputHandlerProps = {
     x = props.x,
     y = props.y,
@@ -26,8 +26,7 @@ function render(props)
   local textProps = {
     value = props.label,
     fontSize = props.fontSize,
-    horizontalAlignment = 'center',
-    verticalAlignment = 'center',
+    alignment = 'center',
     x = props.x,
     y = props.y,
     width = props.width,
@@ -40,9 +39,9 @@ function render(props)
 
   return {
     inputHandler(props, {
-      rect(rectProps),
-      text(textProps)
-    })
+      rect(rectProps, nil, key),
+      text(textProps, nil, key)
+    }, nil, key)
   }
 end
 

@@ -45,10 +45,6 @@ function drawPrimitive(primitiveData, path)
   local primitiveType = primitiveData['type']
   assert(primitiveType ~= nil, 'expect primitive to have a type property')
 
-  -- todo - no guarantee that components of the same type that are siblings
-  -- wouldn't be confused for one another if the table containing them
-  -- was reordered. Does it matter? Two meshes might potentially have different
-  -- vertices defined, so the wrong thing would be rendered. How does React do this?  
   path = path .. '.' .. primitiveType
   local primitiveState = getPrimitiveState(path)
   local drawFunc = getPrimitiveDrawFunction(primitiveType)
@@ -82,7 +78,14 @@ function drawList(list, path)
   end
 
   for index, item in ipairs(list) do
-    local innerPath = path .. '.' .. index
+    local innerPath = nil
+
+    if type(item.key) == 'string' then
+      innerPath = path .. '.' .. item.key
+    else
+      innerPath = path .. '.' .. index
+    end
+    
     draw(item, innerPath)
   end
 end

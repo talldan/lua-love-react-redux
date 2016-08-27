@@ -37,7 +37,7 @@ function getVertices(props)
   }
 end
 
-function render(props)
+function render(props, children, key)
   return basicMesh({
     vertices = getVertices(props),
     x = props.x,
@@ -45,7 +45,7 @@ function render(props)
     scaleX = props.width,
     scaleY = props.height,
     rotation = props.rotation or 0
-  })
+  }, nil, key)
 end
 
 return declare(render, propTypes)

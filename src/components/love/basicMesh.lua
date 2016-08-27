@@ -5,7 +5,8 @@ function render(props, children)
   return {
     type = 'basicMesh',
     props = props,
-    children = children
+    children = children,
+    key = key
   }
 end
 
